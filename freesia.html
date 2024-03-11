@@ -22,6 +22,7 @@
             color: #fff;
             padding: 20px 0;
             text-align: center;
+            transition: background-color 0.3s ease; /* Smooth transition effect for background color */
         }
 
         .logo {
@@ -118,13 +119,14 @@
             width: 100%;
             height: auto;
             margin-bottom: 20px;
-            border-radius: 15px;
+            border-radius: 15px !important;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .container .product .carousel-container .carousel img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            border-radius: 15px;
+            object-fit: cover;
         }
         .product {
             width: 45%;
@@ -182,13 +184,13 @@
         .carousel img {
             width: 100%;
             height: auto;
-            margin-right: 10px;
             border-radius: 10px;
             transition: transform 1s ease;
         }
 
         .carousel img.active {
             display: block; /* Display only active image */
+            border-radius: 15px;
         }
 
         .carousel img:hover {
@@ -200,6 +202,7 @@
 
         .carousel img.prev {
             transform: translateX(-100%); /* Move previous image off screen initially */
+            border-radius: 15px;
         }
         .prev,
         .next {
