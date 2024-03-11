@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وهج للشموع</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Change 'background.jpg' to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #423e3d;
+        }
+        header {
+            position: relative;
+            background-color: rgba(171, 115, 72, 0.7);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .logo {
+            order: 1; /* Ensure logo appears first */
+            margin-right: 10px; /* Add margin to separate logo and business info */
+            display: inline-flex; /* Use inline-flex for better alignment */
+            align-items: center; /* Vertically center the items */
+        }
+
+        .logo img {
+            width: 140px;
+            margin-right: 10px; /* Adjust margin as needed */
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1); /* Zoom in effect on hover */
+        }
+
+        .business-info {
+            text-align: right;
+            margin-left: 10px; /* Add margin to separate logo and business info */
+        }
+
+
+        .business-name {
+            font-size: 24px;
+        }
+
+        .branding {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .branding img {
+            width: 120px; /* Increased logo size */
+            margin-right: 20px; /* Added margin */
+        }
+        .branding div {
+            text-align: right;
+        }
+        h1, .slogan {
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        h1 {
+            font-size: 36px; /* Increased font size for the business name */
+        }
+        .slogan {
+            font-size: 24px; /* Adjust font size as needed */
+            position: relative; /* Ensure positioning relative to the paragraph */
+        }
+        .slogan img {
+            width: 24px; /* Set width in pixels */
+            height: 24px; /* Set height in pixels */
+            vertical-align: middle; /* Align the image vertically */
+            margin-right: 4px; /* Adjust margin as needed */
+        }
+        .gif {
+            width: 0.8rem; /* Set width to 80% of the font size */
+            height: 0.8rem; /* Maintain aspect ratio */
+            vertical-align: middle; /* Align the image vertically */
+        }
+        p {
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        li::before {
+            content: "•";
+            margin-right: 10px;
+        }
+        .highlight {
+            font-weight: bold;
+        }
+        .image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container .product .carousel-container .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .product {
+            width: 45%;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            position: relative; /* Added */
+        }
+        .description {
+            width: 45%;
+            text-align: right;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        footer {
+            background-color: #ab7348;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .contact-info a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info a img {
+            width: 30px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 10px; /* Adjust spacing between icons */
+            transition: transform 0.3s ease; /* Add smooth transition effect */
+        }
+        .contact-info a:hover {
+            color: #ff7f50; /* Highlight shade */
+            transform: scale(1.2); /* Increase size on hover */
+        }
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            justify-content: center; /* Center images horizontally */
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 10px;
+            transition: transform 1s ease;
+        }
+
+        .carousel img.active {
+            display: block; /* Display only active image */
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05); /* Zoom in effect on hover */
+        }
+        .carousel img.next {
+            transform: translateX(100%); /* Move next image off screen initially */
+        }
+
+        .carousel img.prev {
+            transform: translateX(-100%); /* Move previous image off screen initially */
+        }
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .prev {
+            right: 10px;
+        }
+
+        .next {
+            left: 10px;
+        }
+        .add-to-cart {
+            display: flex;
+            align-items: center;
+        }
+
+        .add-to-cart button {
+            background-color: #ab7348;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .add-to-cart button:hover {
+            background-color: #8a5c3e;
+        }
+
+        .quantity::-webkit-outer-spin-button,
+        .quantity::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .quantity {
+            margin: 0 10px;
+            font-size: 18px;
+            width: 2ch; /* Set the width of the input field */
+        }
+        .related-products {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .related-products h2 {
+            margin-top: 0;
+        }
+
+        .related-products .product {
+            width: 45%;
+            border: 2px solid #ab7348;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            position: relative;
+            margin: auto;
+        }
+
+        .related-products img {
+            max-width: 35%; /* Adjust the maximum width as needed */
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease; /* Add smooth transition effect */
+        }
+        
+
+        .related-products p {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .related-products img:hover {
+            transform: scale(1.1); /* Increase size on hover */
+        }
+
+        .btn {
+            background-color: #ab7348;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #8a5c3e;
+        }
+        .description2 {
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .icons {
+            position: relative;
+            bottom: 10px; /* Adjust as needed */
+            left: 10px; /* Move icons to the left */
+            display: flex;
+            align-items: center;
+        }
+
+        .icons img {
+            width: 32px;
+            height: auto;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .icons img:hover {
+            transform: scale(1.2);
+        }
+        .icons-container {
+            position: absolute;
+            bottom: 0px; /* Adjust the distance from the bottom as needed */
+            left: 20px; /* Adjust the distance from the left as needed */
+            display: flex;
+            align-items: flex-end; /* Align items to the bottom of the container */
+        }
+        .search-container {
+            position: absolute;
+            top: -10px; /* Adjust the position as needed */
+            right: -220px; /* Adjust the position as needed */
+            display: flex;
+            align-items: center;
+            max-width: 0; /* Set the maximum width to 0 */
+            overflow: hidden;
+            transition: max-width 0.5s ease, opacity 0.5s ease; /* Transition max-width and opacity */
+            opacity: 0;
+            
+        }
+        .search-container.active {
+            display: block; /* Show the search container when active */
+            max-width: 200px; /* Adjust the maximum width as needed */
+            opacity: 1;
+        }
+        .search-bar {
+            width: 200px; /* Adjust width as needed */
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+            transition: color 0.3s, text-decoration 0.3s; /* Add transition effect */
+        }
+        .nav-link:hover {
+            color: #ff7f50; /* Change color on hover */
+            text-decoration: underline; /* Underline text on hover */
+        }
+        .cart-badge {
+            display: none; /* Hide the badge by default */
+            position: absolute;
+            top: -10px;
+            right: 115px;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <link rel="stylesheet" href="all.min_2.css">
+        <div class="branding">
+            <div class="logo">
+                <img src="logo.png" alt="وهج للشموع">
+            </div>
+            <div class="business-info">
+                <h1 class="business-name">وهج للشموع</h1>
+                <p class="slogan">عطر يضيء الليالي <img class="gif" src="stars.gif" alt="GIF"></p>
+            </div>
+        </div>
+        <div class="icons-container"> <!-- Added container for icons and search bar -->
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search...">
+            </div>
+            <div class="icons">
+                <img src="search-icon.png" alt="Search Icon" class="search-icon">
+                <img src="user-icon.png" alt="User Icon">
+                <div class="cart-icon-container">
+                    <img src="cart-icon.png" alt="Shopping Cart Icon" class="cart-icon">
+                    <span class="cart-badge">0</span> <!-- Cart badge for item count -->
+                </div>
+            </div>
+            
+        </div>
+        <div class="nav-links"> <!-- Added container for navigation links -->
+            <a href="candles.html" class="nav-link">الصفحة الرئيسية</a>
+            <a href="#" class="nav-link">المجلة</a>
+            <a href="#" class="nav-link">من نحن</a>
+        </div>
+    </header>
+    
+
+
+<div class="container">
+    <div class="product">
+        <div class="carousel-container">
+            <div class="carousel">
+                <a href="#"><img class="image active" src="fp_freesia_candle.jpg" alt="صورة شمعة برغموت"></a>
+                <a href="#"><img class="image" src="fp_peach_candle.jpg" alt="صورة شمعة خوخ"></a>
+            </div>
+            <div class="prev">&#10094;</div>
+            <div class="next">&#10095;</div>
+        </div>
+        <!-- Rest of your product details -->
+    </div>
+
+    <div class="description">
+        <h2>النوع الأول FP (Freesia & Peach)</h2>
+        <div class="add-to-cart">
+            <button class="minus-btn">-</button>
+            <input type="number" class="quantity" value="1" min="1" size="2">
+            <button class="plus-btn">+</button>
+            <button class="add-cart-btn">أضف إلى السلة</button>
+        </div>
+        <h3>وصف المنتج:</h3>
+        <p>النوع الأول FP اختصار لرائحة  ( Freesia & Peach ) : رائحة زهرة الفريزيا و وفاكهة الخوخ.<br>
+            سبب اختيار هذا المزيج : اختيار شمعة برائحة الفريزيا والخوخ قد يكون بسبب توليفة الروائح المميزة التي تجمع بين عبير الفريزيا الزهري اللطيف ورائحة الخوخ الحلوة والمنعشة. هذا يمكن أن يضيف طابعًا فريدًا ومتناغمًا للبيئة المحيطة، مما يعزز الاستمتاع بتجربة الراحة والاسترخاء.<br>
+        - فتره اشتعال الشمعة : اكثر من 30 ساعة.  </br>
+        - مصنوع من 93‎%‎ شمع و 7 ‎%‎ عطر. <br>
+        - الوزن : 0.2 kg.<br></p>
+        
+        
+    </div>
+    
+</div>
+<div class="related-products">
+    <h2>منتجات ذات صلة</h2>
+    <div class="product">
+        <h3>النوع الثاني BP (Bergamot & Peach)</h3>
+        <a href="bergamot.html">
+        <img src="bp_bergamot_candle.jpg" alt="شمعة برغموت">
+        </a>
+        <br>
+        <a href="bergamot.html" class="btn">عرض المنتج</a>
+    </div>
+</div>
+<div class="description2">
+    <h2>مايميز شموعنا</h2>
+    <p><br>استخدام توليفات عطرية هادئة تضفي جو من الاسترخاء وتجربة فريده.  التصميم الفريد حيث يمكننا إعادة استخدام زجاجه الشمعة بعد انتهاء الشمع بشكل إبداعي كجزء من ديكور المنزل، أو استخدام التغليف كمحفظة لحفظ الأشياء بالإضافة إلى فرص تحويل التاق إلى ميدالية أو تعليقة جميلة للشنطة.</br> 
+        إن إعادة التدوير تعتبر جزءًا من مفهوم الاستدامة وهذا نهج دولتنا في المحافظه على البيئة .</p>
+</div>
+
+<footer>
+    <div class="contact-info">
+        <a href="mailto:info@example.com">info@example.com</a>
+        <a href="tel:+123456789">+123456789</a>
+        <a href="#" target="_blank"><img src="facebook_logo.png" alt="Facebook" width="30"></a>
+        <a href="#" target="_blank"><img src="twitter_logo.png" alt="Twitter" width="30"></a>
+        <a href="#" target="_blank"><img src="instagram_logo.png" alt="Instagram" width="30"></a>
+    </div>
+    <p>&copy; 2024 وهج للشموع. جميع الحقوق محفوظة.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const minusBtn = document.querySelector('.minus-btn');
+        const plusBtn = document.querySelector('.plus-btn');
+        const quantityInput = document.querySelector('.quantity');
+
+        minusBtn.addEventListener('click', function() {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        plusBtn.addEventListener('click', function() {
+            const currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        });
+    });
+
+    const carousels = document.querySelectorAll('.carousel');
+
+    carousels.forEach(carousel => {
+        const prevBtn = carousel.parentElement.querySelector('.prev');
+        const nextBtn = carousel.parentElement.querySelector('.next');
+        const slides = carousel.querySelectorAll('img');
+
+        let index = 0;
+        const totalSlides = slides.length;
+
+        function updateCarousel() {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    slide.classList.remove('next', 'prev');
+                } else if (i === index - 1 || (index === 0 && i === totalSlides - 1)) {
+                    slide.classList.add('prev');
+                    slide.classList.remove('active', 'next');
+                } else if (i === index + 1 || (index === totalSlides - 1 && i === 0)) {
+                    slide.classList.add('next');
+                    slide.classList.remove('active', 'prev');
+                } else {
+                    slide.classList.remove('active', 'next', 'prev');
+                }
+            });
+        }
+
+        function showNextSlide() {
+            index = (index === totalSlides - 1) ? 0 : index + 1;
+            updateCarousel();
+        }
+
+        function showPrevSlide() {
+            index = (index === 0) ? totalSlides - 1 : index - 1;
+            updateCarousel();
+        }
+
+        setInterval(showNextSlide, 5000);
+
+        prevBtn.addEventListener('click', showPrevSlide);
+        nextBtn.addEventListener('click', showNextSlide);
+    });
+
+    let slideIndex = 0;
+
+    function plusSlide(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        const slides = document.querySelectorAll('.carousel img');
+        if (n >= slides.length) { slideIndex = 0; }
+        if (n < 0) { slideIndex = slides.length - 1; }
+        slides.forEach(slide => slide.style.transform = `translateX(-${slideIndex * 100}%)`);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchIcon = document.querySelector('.icons img[src="search-icon.png"]');
+    const searchContainer = document.querySelector('.search-container');
+
+    searchIcon.addEventListener('click', function() {
+        searchContainer.classList.toggle('active'); // Toggle the 'active' class on click
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtn = document.querySelector('.add-cart-btn');
+    const cartBadge = document.querySelector('.cart-badge');
+
+    let itemCount = 0;
+
+    addToCartBtn.addEventListener('click', function() {
+        itemCount++;
+        updateCartBadge(itemCount);
+    });
+
+    function updateCartBadge(count) {
+        if (count === 0) {
+            cartBadge.style.display = 'none'; // Hide the badge if count is zero
+        } else {
+            cartBadge.textContent = count;
+            cartBadge.style.display = 'inline-block'; // Show the badge
+        }
+    }
+});
+</script>
+</body>
+</html>
