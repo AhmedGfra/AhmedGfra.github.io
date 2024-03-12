@@ -310,7 +310,24 @@
         @media only screen and (max-width: 480px) {
         /* CSS rules for even smaller screens (e.g., smaller smartphones) */
         }
+        .dots-container {
+            text-align: center;
+        }
 
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #bbb;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .dot.active {
+            background-color: #555;
+        }
 
     </style>
 </head>
@@ -352,8 +369,7 @@
                     <a href="freesia.html"><img class="image active" src="fp_freesia_candle.jpg" alt="صورة شمعة فريزيا"></a>
                     <a href="freesia.html"><img class="image" src="fp_peach_candle.jpg" alt="صورة شمعة خوخ"></a>
                 </div>
-                <div class="prev">&#10094;</div>
-                <div class="next">&#10095;</div>
+                <div class="dots-container"></div>
             </div>
             <!-- Rest of your product details -->
         </div>
@@ -365,8 +381,7 @@
                     <a href="bergamot.html"><img class="image active" src="bp_bergamot_candle.jpg" alt="صورة شمعة برغموت"></a>
                     <a href="bergamot.html"><img class="image" src="bp_peach_candle.jpg" alt="صورة شمعة خوخ"></a>
                 </div>
-                <div class="prev">&#10094;</div>
-                <div class="next">&#10095;</div>
+                <div class="dots-container"></div>
             </div>
             <!-- Rest of your product details -->
         </div>
@@ -387,42 +402,54 @@
     <p>&copy; 2024 وهج للشموع. جميع الحقوق محفوظة.</p>
 </footer>
 <script>
-    const carousels = document.querySelectorAll('.carousel');
+    const carousels = document.querySelectorAll('.carousel-container');
 
-    carousels.forEach(carousel => {
-        const prevBtn = carousel.parentElement.querySelector('.prev');
-        const nextBtn = carousel.parentElement.querySelector('.next');
-        const slides = carousel.querySelectorAll('img');
+carousels.forEach(carouselContainer => {
+    const carousel = carouselContainer.querySelector('.carousel');
+    const slides = carousel.querySelectorAll('.image');
+    const dotsContainer = carouselContainer.querySelector('.dots-container');
+    let currentIndex = 0;
 
-        let index = 0;
-        const totalSlides = slides.length;
+    // Function to update the carousel
+    function updateCarousel() {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentIndex);
+        });
+        updateDots();
+    }
 
-        // Function to update the carousel
-        function updateCarousel() {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-        }
+    // Function to update the active dot
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
 
-        // Function to show the next slide
-        function showNextSlide() {
-            index = (index === totalSlides - 1) ? 0 : index + 1;
+    // Create dots for each slide
+    slides.forEach((slide, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.addEventListener('click', () => {
+            currentIndex = i;
             updateCarousel();
-        }
-
-        // Function to show the previous slide
-        function showPrevSlide() {
-            index = (index === 0) ? totalSlides - 1 : index - 1;
-            updateCarousel();
-        }
-
-        // Automatic slide change every 5 seconds
-        setInterval(showNextSlide, 5000);
-
-        // Event listeners for previous and next buttons
-        prevBtn.addEventListener('click', showPrevSlide);
-        nextBtn.addEventListener('click', showNextSlide);
+        });
+        dotsContainer.appendChild(dot);
     });
+
+    // Function to show the next slide
+    function showNextSlide() {
+        currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+    }
+
+    // Automatic slide change every 10 seconds
+    setInterval(showNextSlide, 10000);
+
+    // Show the first slide initially
+    updateCarousel();
+});
+
 
     document.addEventListener('DOMContentLoaded', function() {
     const searchIcon = document.querySelector('.icons img[src="search-icon.png"]');

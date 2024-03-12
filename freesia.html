@@ -206,24 +206,31 @@
             width: 100%;
             height: auto;
             border-radius: 10px;
-            transition: transform 1s ease;
+            display: none;
         }
 
         .carousel img.active {
-            display: block; /* Display only active image */
+            display: block;
             border-radius: 15px;
+            transform: scale(1);
+            transition: transform 1s, filter 1s; /* Add filter transition */
+            filter: blur(0px); /* Initial state, no blur */
         }
 
-        .carousel img:hover {
-            transform: scale(1.05); /* Zoom in effect on hover */
+        .carousel img.next,
+        .carousel img.prev {
+            filter: blur(8px); /* Apply blur to next and previous images */
         }
+
         .carousel img.next {
-            transform: translateX(100%); /* Move next image off screen initially */
+            transform: scale(0.9); /* Scale down slightly for next image */
         }
 
         .carousel img.prev {
-            transform: translateX(-100%); /* Move previous image off screen initially */
-            border-radius: 15px;
+            transform: scale(0.9); /* Scale down slightly for previous image */
+        }
+        .carousel img:hover {
+            transform: scale(1.05); /* Zoom in effect on hover */
         }
         .prev,
         .next {
@@ -427,8 +434,25 @@
             text-align: center;
             line-height: 20px;
         }
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
 
-    </style>
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #bbb;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
@@ -474,8 +498,7 @@
                 <a href="#"><img class="image active" src="fp_freesia_candle.jpg" alt="صورة شمعة برغموت"></a>
                 <a href="#"><img class="image" src="fp_peach_candle.jpg" alt="صورة شمعة خوخ"></a>
             </div>
-            <div class="prev">&#10094;</div>
-            <div class="next">&#10095;</div>
+            <div class="dots-container"></div>
         </div>
         <!-- Rest of your product details -->
     </div>
@@ -528,108 +551,115 @@
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const minusBtn = document.querySelector('.minus-btn');
-        const plusBtn = document.querySelector('.plus-btn');
-        const quantityInput = document.querySelector('.quantity');
+    function initializeCarousel() {
+   const carouselContainers = document.querySelectorAll('.carousel-container');
 
-        minusBtn.addEventListener('click', function() {
-            const currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
+   carouselContainers.forEach(carouselContainer => {
+       const slides = carouselContainer.querySelectorAll('.carousel img');
+       const dotsContainer = carouselContainer.querySelector('.dots-container');
+       let currentIndex = 0; // Initialize current slide index
 
-        plusBtn.addEventListener('click', function() {
-            const currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
-        });
-    });
+       // Create dots for each slide
+       slides.forEach((slide, index) => {
+           const dot = document.createElement('span');
+           dot.classList.add('dot');
+           dot.addEventListener('click', () => {
+               showSlide(index);
+           });
+           dotsContainer.appendChild(dot);
+       });
 
-    const carousels = document.querySelectorAll('.carousel');
+       // Show the first slide initially
+       showSlide(currentIndex);
 
-    carousels.forEach(carousel => {
-        const prevBtn = carousel.parentElement.querySelector('.prev');
-        const nextBtn = carousel.parentElement.querySelector('.next');
-        const slides = carousel.querySelectorAll('img');
+       // Function to advance to the next slide
+       function nextSlide() {
+           currentIndex = (currentIndex + 1) % slides.length;
+           showSlide(currentIndex);
+       }
 
-        let index = 0;
-        const totalSlides = slides.length;
+       // Auto-slide functionality
+       setInterval(nextSlide, 10000); // 10 seconds interval (10000 milliseconds)
+   });
+}
 
-        function updateCarousel() {
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.classList.add('active');
-                    slide.classList.remove('next', 'prev');
-                } else if (i === index - 1 || (index === 0 && i === totalSlides - 1)) {
-                    slide.classList.add('prev');
-                    slide.classList.remove('active', 'next');
-                } else if (i === index + 1 || (index === totalSlides - 1 && i === 0)) {
-                    slide.classList.add('next');
-                    slide.classList.remove('active', 'prev');
-                } else {
-                    slide.classList.remove('active', 'next', 'prev');
-                }
-            });
-        }
+function showSlide(index) {
+   const slides = document.querySelectorAll('.carousel img');
+   slides.forEach((slide, i) => {
+       if (i === index) {
+           slide.classList.add('active');
+           slide.classList.remove('prev', 'next');
+       } else if (i === index - 1 || (index === 0 && i === slides.length - 1)) {
+           slide.classList.add('prev');
+           slide.classList.remove('active', 'next');
+       } else if (i === index + 1 || (index === slides.length - 1 && i === 0)) {
+           slide.classList.add('next');
+           slide.classList.remove('active', 'prev');
+       } else {
+           slide.classList.remove('active', 'prev', 'next');
+       }
+   });
 
-        function showNextSlide() {
-            index = (index === totalSlides - 1) ? 0 : index + 1;
-            updateCarousel();
-        }
+   // Update active dot
+   const dots = document.querySelectorAll('.dot');
+   dots.forEach((dot, i) => {
+       if (i === index) {
+           dot.classList.add('active');
+       } else {
+           dot.classList.remove('active');
+       }
+   });
+}
 
-        function showPrevSlide() {
-            index = (index === 0) ? totalSlides - 1 : index - 1;
-            updateCarousel();
-        }
+document.addEventListener('DOMContentLoaded', function() {
+   initializeCarousel();
+});
 
-        setInterval(showNextSlide, 5000);
+document.addEventListener('DOMContentLoaded', function() {
+       const minusBtn = document.querySelector('.minus-btn');
+       const plusBtn = document.querySelector('.plus-btn');
+       const quantityInput = document.querySelector('.quantity');
 
-        prevBtn.addEventListener('click', showPrevSlide);
-        nextBtn.addEventListener('click', showNextSlide);
-    });
+       minusBtn.addEventListener('click', function() {
+           const currentValue = parseInt(quantityInput.value);
+           if (currentValue > 1) {
+               quantityInput.value = currentValue - 1;
+           }
+       });
 
-    let slideIndex = 0;
+       plusBtn.addEventListener('click', function() {
+           const currentValue = parseInt(quantityInput.value);
+           quantityInput.value = currentValue + 1;
+       });
+   });
 
-    function plusSlide(n) {
-        showSlides(slideIndex += n);
-    }
+document.addEventListener('DOMContentLoaded', function() {
+   const addToCartBtn = document.querySelector('.add-cart-btn');
+   const cartBadge = document.querySelector('.cart-badge');
 
-    function showSlides(n) {
-        const slides = document.querySelectorAll('.carousel img');
-        if (n >= slides.length) { slideIndex = 0; }
-        if (n < 0) { slideIndex = slides.length - 1; }
-        slides.forEach(slide => slide.style.transform = `translateX(-${slideIndex * 100}%)`);
-    }
+   let itemCount = 0;
 
-    document.addEventListener('DOMContentLoaded', function() {
+   addToCartBtn.addEventListener('click', function() {
+       itemCount++;
+       updateCartBadge(itemCount);
+   });
+
+   function updateCartBadge(count) {
+       if (count === 0) {
+           cartBadge.style.display = 'none'; // Hide the badge if count is zero
+       } else {
+           cartBadge.textContent = count;
+           cartBadge.style.display = 'inline-block'; // Show the badge
+       }
+   }
+});
+document.addEventListener('DOMContentLoaded', function() {
     const searchIcon = document.querySelector('.icons img[src="search-icon.png"]');
     const searchContainer = document.querySelector('.search-container');
 
     searchIcon.addEventListener('click', function() {
         searchContainer.classList.toggle('active'); // Toggle the 'active' class on click
     });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addToCartBtn = document.querySelector('.add-cart-btn');
-    const cartBadge = document.querySelector('.cart-badge');
-
-    let itemCount = 0;
-
-    addToCartBtn.addEventListener('click', function() {
-        itemCount++;
-        updateCartBadge(itemCount);
-    });
-
-    function updateCartBadge(count) {
-        if (count === 0) {
-            cartBadge.style.display = 'none'; // Hide the badge if count is zero
-        } else {
-            cartBadge.textContent = count;
-            cartBadge.style.display = 'inline-block'; // Show the badge
-        }
-    }
 });
 </script>
 </body>
