@@ -35,7 +35,7 @@
         }
         header {
             position: relative;
-            background-color: rgba(171, 115, 72, 0.7);
+            background-color: rgba(173, 116, 71, 0.702);
             color: #fff;
             padding: 20px 0;
             text-align: center;
@@ -141,7 +141,7 @@
         }
         .product {
             width: 45%;
-            border: 2px solid #ab7348;
+            border: 2px solid #ab7348b3;
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
@@ -155,27 +155,40 @@
             text-align: center;
             padding: 20px 0;
         }
-        .contact-info {
+
+        .footer-container {
             display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+        .contact-info {
+            flex-grow: 1;
+            text-align: center;
+        }
+
         .contact-info a {
-            display: inline-block;
             margin: 0 10px;
             color: #fff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .contact-info a img {
-            width: 30px; /* Adjust width as needed */
-            height: auto; /* Maintain aspect ratio */
-            margin-right: 10px; /* Adjust spacing between icons */
-            transition: transform 0.3s ease; /* Add smooth transition effect */
+            width: 30px;
+            height: auto;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
         }
+
         .contact-info a:hover {
-            color: #ff7f50; /* Highlight shade */
-            transform: scale(1.2); /* Increase size on hover */
+            color: #ff7f50;
+        }
+
+        .contact-info a:hover img {
+            transform: scale(1.2);
         }
         .carousel-container {
             overflow: hidden;
@@ -328,6 +341,33 @@
         .dot.active {
             background-color: #555;
         }
+        .product-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            background-color: rgba(171, 115, 72, 0.7);
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-link:hover {
+            background-color: #8e5e32;
+        }
+        .college-logo {
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .college-logo img {
+            width: 120px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .college-logo:hover {
+            transform: scale(1.2); /* Zoom in effect on hover */
+        }
 
     </style>
 </head>
@@ -363,19 +403,20 @@
     </header>
     <div class="container">
         <div class="product">
-            <h2>النوع الأول FP (Freesia & Peach)</h2>
+            <h2>FP (Freesia & Peach)<br>الفريزيا والخوخ</h2>
             <div class="carousel-container">
                 <div class="carousel">
                     <a href="freesia.html"><img class="image active" src="fp_freesia_candle.jpg" alt="صورة شمعة فريزيا"></a>
                     <a href="freesia.html"><img class="image" src="fp_peach_candle.jpg" alt="صورة شمعة خوخ"></a>
                 </div>
                 <div class="dots-container"></div>
+                <a href="freesia.html" class="product-link">عرض المنتج</a>
             </div>
             <!-- Rest of your product details -->
         </div>
     
         <div class="product">
-            <h2>النوع الثاني BP (Bergamot & Peach)</h2>
+            <h2>BP (Bergamot & Peach)<br>البرغموت والخوخ </h2>
             <div class="carousel-container">
                 <div class="carousel">
                     <a href="bergamot.html"><img class="image active" src="bp_bergamot_candle.jpg" alt="صورة شمعة برغموت"></a>
@@ -383,6 +424,7 @@
                 </div>
                 <div class="dots-container"></div>
             </div>
+            <a href="bergamot.html" class="product-link">عرض المنتج</a>
             <!-- Rest of your product details -->
         </div>
     </div>
@@ -391,16 +433,22 @@
         <p><br>استخدام توليفات عطرية هادئة تضفي جو من الاسترخاء وتجربة فريده.  التصميم الفريد حيث يمكننا إعادة استخدام زجاجه الشمعة بعد انتهاء الشمع بشكل إبداعي كجزء من ديكور المنزل، أو استخدام التغليف كمحفظة لحفظ الأشياء بالإضافة إلى فرص تحويل التاق إلى ميدالية أو تعليقة جميلة للشنطة.</br> 
             إن إعادة التدوير تعتبر جزءًا من مفهوم الاستدامة وهذا نهج دولتنا في المحافظه على البيئة .</p>
     </div>
-<footer>
-    <div class="contact-info">
-        <a href="mailto:info@example.com">info@example.com</a>
-        <a href="tel:+123456789">+123456789</a>
-        <a href="#" target="_blank"><img src="facebook_logo.png" alt="Facebook" width="30"></a>
-        <a href="#" target="_blank"><img src="twitter_logo.png" alt="Twitter" width="30"></a>
-        <a href="#" target="_blank"><img src="instagram_logo.png" alt="Instagram" width="30"></a>
-    </div>
-    <p>&copy; 2024 وهج للشموع. جميع الحقوق محفوظة.</p>
-</footer>
+    <footer>
+        <div class="footer-container">
+            <div class="college-logo">
+                <img src="Liwa.png" alt="College Logo">
+            </div>
+            <div class="contact-info">
+                <a href="#" target="_blank"><img src="facebook_logo.png" alt="Facebook" width="30"></a>
+                <a href="#" target="_blank"><img src="twitter_logo.png" alt="Twitter" width="30"></a>
+                <a href="#" target="_blank"><img src="instagram_logo.png" alt="Instagram" width="30"></a><br><br>
+                <a href="mailto:info@example.com">info@wahjcandle.com</a>
+                <a href="tel:+971 123456789">+971123456789</a>
+                
+            </div>
+            <p>&copy; 2024 وهج للشموع. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
 <script>
     const carousels = document.querySelectorAll('.carousel-container');
 

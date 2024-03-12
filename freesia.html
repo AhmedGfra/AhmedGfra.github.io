@@ -169,27 +169,40 @@
             text-align: center;
             padding: 20px 0;
         }
-        .contact-info {
+
+        .footer-container {
             display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+        .contact-info {
+            flex-grow: 1;
+            text-align: center;
+        }
+
         .contact-info a {
-            display: inline-block;
             margin: 0 10px;
             color: #fff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .contact-info a img {
-            width: 30px; /* Adjust width as needed */
-            height: auto; /* Maintain aspect ratio */
-            margin-right: 10px; /* Adjust spacing between icons */
-            transition: transform 0.3s ease; /* Add smooth transition effect */
+            width: 30px;
+            height: auto;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
         }
+
         .contact-info a:hover {
-            color: #ff7f50; /* Highlight shade */
-            transform: scale(1.2); /* Increase size on hover */
+            color: #ff7f50;
+        }
+
+        .contact-info a:hover img {
+            transform: scale(1.2);
         }
         .carousel-container {
             overflow: hidden;
@@ -258,7 +271,7 @@
         }
 
         .add-to-cart button {
-            background-color: #ab7348;
+            background-color: #ab7348b3;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -301,7 +314,7 @@
 
         .related-products .product {
             width: 45%;
-            border: 2px solid #ab7348;
+            border: 2px solid #ab7348b3;
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
@@ -330,7 +343,7 @@
         }
 
         .btn {
-            background-color: #ab7348;
+            background-color: #ab7348b3;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -453,6 +466,18 @@
         .dot.active {
             background-color: #555;
         }
+        .college-logo {
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .college-logo img {
+            width: 120px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .college-logo:hover {
+            transform: scale(1.2); /* Zoom in effect on hover */
+        }
     </style>
 </head>
 <body>
@@ -504,7 +529,8 @@
     </div>
 
     <div class="description">
-        <h2 style="font-size: 28px;">النوع الأول FP (Freesia & Peach)</h2>
+        <h2 style="font-size: 28px;">FP (Freesia & Peach)</h2>
+        <p style="font-size: 24px;" style="font-family: 'MyCalibriRegular', sans-serif;">25 د.إ.</p>
         <div class="add-to-cart">
             <button class="minus-btn">-</button>
             <input type="number" class="quantity" value="1" min="1" size="2">
@@ -512,7 +538,7 @@
             <button class="add-cart-btn">أضف إلى السلة</button>
         </div>
         <h3 style="font-size: 24px;">وصف المنتج:</h3>
-        <p style="font-size: 20px;">النوع الأول FP اختصار لرائحة  ( Freesia & Peach ) : رائحة زهرة الفريزيا و وفاكهة الخوخ.<br>
+        <p style="font-size: 20px;">FP اختصار لرائحة  ( Freesia & Peach ) : رائحة زهرة الفريزيا و وفاكهة الخوخ.<br>
             سبب اختيار هذا المزيج : اختيار شمعة برائحة الفريزيا والخوخ قد يكون بسبب توليفة الروائح المميزة التي تجمع بين عبير الفريزيا الزهري اللطيف ورائحة الخوخ الحلوة والمنعشة. هذا يمكن أن يضيف طابعًا فريدًا ومتناغمًا للبيئة المحيطة، مما يعزز الاستمتاع بتجربة الراحة والاسترخاء.<br>
         - فتره اشتعال الشمعة : اكثر من 30 ساعة.  </br>
         - مصنوع من 93‎%‎ شمع و 7 ‎%‎ عطر. <br>
@@ -540,14 +566,20 @@
 </div>
 
 <footer>
-    <div class="contact-info">
-        <a href="mailto:info@example.com">info@wahjcandle.com</a>
-        <a href="tel:+971 123456789">971123456789+</a>
-        <a href="#" target="_blank"><img src="facebook_logo.png" alt="Facebook" width="30"></a>
-        <a href="#" target="_blank"><img src="twitter_logo.png" alt="Twitter" width="30"></a>
-        <a href="#" target="_blank"><img src="instagram_logo.png" alt="Instagram" width="30"></a>
+    <div class="footer-container">
+        <div class="college-logo">
+            <img src="Liwa.png" alt="College Logo">
+        </div>
+        <div class="contact-info">
+            <a href="#" target="_blank"><img src="facebook_logo.png" alt="Facebook" width="30"></a>
+            <a href="#" target="_blank"><img src="twitter_logo.png" alt="Twitter" width="30"></a>
+            <a href="#" target="_blank"><img src="instagram_logo.png" alt="Instagram" width="30"></a><br><br>
+            <a href="mailto:info@example.com">info@wahjcandle.com</a>
+            <a href="tel:+971 123456789">+971123456789</a>
+            
+        </div>
+        <p>&copy; 2024 وهج للشموع. جميع الحقوق محفوظة.</p>
     </div>
-    <p >&copy; 2024 وهج للشموع. جميع الحقوق محفوظة.</p>
 </footer>
 
 <script>
