@@ -6,6 +6,24 @@
     <title>وهج للشموع</title>
     <link rel="stylesheet" href="all.min_2.css"> <!-- Add Font Awesome CSS -->
     <style>
+        @font-face {
+            font-family: MyArabTyping;
+            src: url('arabtype.ttf') format('truetype');
+        }
+        /* Regular font */
+        @font-face {
+            font-family: MyCalibriRegular;
+            src: url('calibri.ttf') format('truetype');
+            font-weight: normal; /* Specify font weight as normal */
+        }
+
+        /* Bold font */
+        @font-face {
+            font-family: MyCalibriFontBold;
+            src: url('calibrib.ttf') format('truetype');
+            font-weight: bold; /* Specify font weight as bold */
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             direction: rtl;
@@ -51,7 +69,7 @@
 
         .business-name {
             font-size: 48px;
-            font-family: 'Arabic Typesetting', sans-serif;
+            font-family: 'MyArabTyping', sans-serif;
         }
 
         .branding {
@@ -87,7 +105,7 @@
         .slogan {
             font-size: 40px; /* Adjust font size as needed */
             position: relative; /* Ensure positioning relative to the paragraph */
-            font-family: 'Arabic Typesetting', sans-serif;
+            font-family: 'MyArabTyping', sans-serif;
         }
         .slogan img {
             width: 24px; /* Set width in pixels */
@@ -104,7 +122,7 @@
             line-height: 1.6;
             text-align: right;
             margin-bottom: 20px;
-            font-family: 'Calibri', sans-serif;
+            font-family: 'MyCalibriRegular', sans-serif;
         }
         ul {
             list-style-type: none;
@@ -144,7 +162,7 @@
             padding: 20px;
             margin-bottom: 20px;
             box-sizing: border-box;
-            font-family: 'Calibri', sans-serif;
+            font-family: 'MyCalibriFontBold', sans-serif;
         }
         footer {
             background-color: #ab7348;
@@ -268,7 +286,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            font-family: 'Calibri', sans-serif;
+            font-family: 'MyCalibriFontBold', sans-serif;
         }
 
         .related-products h2 {
@@ -327,7 +345,7 @@
             margin: 20px auto;
             max-width: 800px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            font-family: 'Calibri', sans-serif;
+            font-family: 'MyCalibriFontBold', sans-serif;
         }
         .icons {
             position: relative;
@@ -390,7 +408,7 @@
             margin-left: 20px;
             font-size: 36px;
             transition: color 0.3s, text-decoration 0.3s; /* Add transition effect */
-            font-family: 'Arabic Typesetting', sans-serif;
+            font-family: 'MyArabTyping', sans-serif;
         }
         .nav-link:hover {
             color: #ff7f50; /* Change color on hover */
